@@ -86,7 +86,7 @@ Contender_Voice_Intelligence/
    
    Clone the repository and set up a virtual environment :
 
-   git clone (https://github.com/truefoxaiinc/Contender-Voice-Intelligence.git)
+   git clone ( https://github.com/truefoxaiinc/Contender-Voice-Intelligence.git )
    
    cd Contender_Voice_Intelligence
 
