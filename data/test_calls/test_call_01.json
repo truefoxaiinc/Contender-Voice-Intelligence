@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-001",
+  "expected_category": "Shipment Tracking Inquiry",
+  "expected_priority": "High",
+  "transcript": "Hello, this is John from ABC Manufacturing. I'm calling to track shipment 458 that was supposed to arrive at our plant today by noon. It's already 2 PM and our assembly line is completely stopped waiting on these parts. Please call me back at 555-0199 as soon as possible."
+}

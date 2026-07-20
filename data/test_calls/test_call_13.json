@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-013",
+  "expected_category": "Invoice Inquiry",
+  "expected_priority": "Low",
+  "transcript": "Good morning, David from Accounts Payable at Global Freight. I am requesting a copy of invoice 6610 for shipment 2099 billed last month. Please email it over to billing@globalfreight.com."
+}

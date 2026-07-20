@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-005",
+  "expected_category": "Quote Request",
+  "expected_priority": "Normal",
+  "transcript": "Hi, my name is Sarah from Apex Logistics. I need a quote for a shipment going from Atlanta to Miami next Tuesday. We need a refrigerated truck, but I don't have the exact pallet weight or dimensions yet. Call me back at 555-3390."
+}

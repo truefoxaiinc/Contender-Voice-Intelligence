@@ -1,0 +1,9 @@
+Standard Operating Procedure - Delivery & Pickup Issues:
+1. Priority Classification Guidelines:
+   - Urgent: Any safety hazards, vehicle accidents, driver emergencies, or critical line-down situations.
+   - High: Same-day delivery delays, missed pickup windows, damaged freight upon arrival, or dock refusal.
+   - Normal/Low: Advance notice of minor delays, future schedule changes, or routine location confirmation.
+2. Immediate Next Actions:
+   - For reported damages, direct staff to inspect photo proof and delay POD signing until verified.
+   - For missed pickup/delivery windows, direct staff to check driver GPS and immediately notify carrier dispatch.
+   - Ensure shipment reference numbers/BOL numbers are extracted whenever available.

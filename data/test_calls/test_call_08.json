@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-008",
+  "expected_category": "Pickup Issue",
+  "expected_priority": "High",
+  "transcript": "Good morning, this is Tom from Gateway Warehouse. We had a pickup scheduled for shipment 3021 between 8 AM and 10 AM today. It's now 11:30 AM and no truck has arrived, and our shipping dock closes at noon. Please let us know where the driver is. Reach me at 555-4411."
+}

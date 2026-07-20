@@ -1,0 +1,6 @@
+Standard Operating Procedure - Carrier & Driver Communications:
+1. Essential Data Capture:
+   - When carriers or drivers call to update status, capture truck/trailer number, current location, updated ETA, and driver name.
+2. Routing & Status Updates:
+   - If a driver reports weather or traffic delays resulting in an updated ETA, log the delay reason clearly in 'important_information'.
+   - Classify routine ETA updates as Normal priority unless the revised ETA violates a strict customer deadline.

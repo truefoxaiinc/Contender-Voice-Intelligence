@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-003",
+  "expected_category": "Shipment Tracking Inquiry",
+  "expected_priority": "Normal",
+  "transcript": "Hey, this is Robert calling from Midwest Supply. We are expecting a pallet of industrial valves delivered sometime today or tomorrow, but I don't have the order number or BOL on me. Can you look up shipments coming to our facility in Columbus?"
+}

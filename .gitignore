@@ -1,0 +1,21 @@
+# Environment Variables & Secrets
+.env
+*.env.local
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE & System Files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+evaluation_results.csv

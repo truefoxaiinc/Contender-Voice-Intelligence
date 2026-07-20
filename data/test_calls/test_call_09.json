@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-009",
+  "expected_category": "Pickup Issue",
+  "expected_priority": "Normal",
+  "transcript": "Hello, driver Mike here. Dispatch sent me to pickup load 501, but building 4 at this address doesn't exist. It looks like an empty lot. I need dispatch to re-confirm the correct pickup address for this shipper."
+}

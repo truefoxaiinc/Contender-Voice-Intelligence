@@ -1,0 +1,8 @@
+Standard Operating Procedure - Freight Quote Requests:
+1. Standard Required Fields: Every freight quote request must attempt to collect origin location, destination location, pickup date, equipment type (e.g., Dry Van, Reefer, Flatbed), total weight, and pallet count/dimensions.
+2. Handling Missing Information:
+   - If key specifications (weight, dimensions, or trailer type) are absent, list them under 'missing_information'.
+   - The 'recommended_next_action' must instruct staff to contact the customer to gather missing specs before calculating rate quotes.
+3. Pricing & Commitment Restrictions:
+   - AI systems and automated tools must NEVER generate, estimate, or commit freight prices directly to callers.
+   - All quotes must be manually calculated and formally issued by human dispatch staff.

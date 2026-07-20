@@ -1,0 +1,9 @@
+Standard Operating Procedure - Callback Guidelines & Escalations:
+1. Callback Response Time Targets:
+   - Urgent Priority: Immediate human callback required (target: within 15 minutes).
+   - High Priority: Callback required within 1 business hour (or same-day action).
+   - Normal Priority: Standard callback within 24 business hours.
+   - Low Priority: No immediate callback required; handle via routine email or portal update.
+2. Escalation Triggers:
+   - Customer Complaints (e.g., unauthorized fees, recurring delays) must always be escalated for human supervisor review.
+   - Always state the root reason for the assigned priority level in 'priority_reason'.

@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-004",
+  "expected_category": "Quote Request",
+  "expected_priority": "Normal",
+  "transcript": "Hello, this is Karen from Pinnacle Steel. I need a freight rate quote for a 53-foot dry van leaving Chicago, IL on August 5th and delivering to Dallas, TX. Total freight weight is 38,000 lbs on 20 standard pallets. Please email quote to karen@pinnacle.com or call 555-8821."
+}

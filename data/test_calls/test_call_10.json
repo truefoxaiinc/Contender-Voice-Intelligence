@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-010",
+  "expected_category": "Customer Complaint",
+  "expected_priority": "High",
+  "transcript": "This is Amanda from Nexus Tech. We just received invoice 4401 and were charged a $300 detention fee that was never authorized. Our dock loaded the truck in under 45 minutes. I need a supervisor to adjust this bill immediately. Contact me at 555-7788."
+}

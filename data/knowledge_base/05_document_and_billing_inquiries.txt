@@ -1,0 +1,7 @@
+Standard Operating Procedure - Document & Billing Requests:
+1. Invoices & Financials:
+   - Invoice Inquiries and billing disputes must capture invoice numbers and shipment reference IDs.
+   - Billing disputes (e.g., detention charges, accessorial fee disputes) must be classified as High priority and flagged for Accounts Receivable review.
+2. Document Requests:
+   - Requests for Proof of Delivery (POD), Bill of Lading (BOL), or Rate Confirmations are classified as Low to Normal priority.
+   - Direct staff to email requested PDF documentation to the verified contact email provided by the caller.

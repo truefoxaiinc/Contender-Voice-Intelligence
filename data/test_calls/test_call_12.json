@@ -1,0 +1,6 @@
+{
+  "call_id": "CALL-012",
+  "expected_category": "Carrier Communication",
+  "expected_priority": "Normal",
+  "transcript": "Hey dispatch, this is Carlos driving truck 402 carrying shipment 992. Just updating my ETA. Ran into heavy construction traffic on I-95, so my revised arrival time at the receiver is now 4:30 PM instead of 3:00 PM."
+}
