@@ -16,9 +16,12 @@ VECTOR_DB_DIR = BASE_DIR / "vector_db"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # Model Configuration
-LLM_MODEL_NAME = "gpt-4o-mini"  # Or your chosen commercial/local model
-EMBEDDING_MODEL_NAME = "text-embedding-3-small"
+LLM_MODEL_NAME = os.getenv("LLM_MODEL_NAME", "gpt-4o-mini")
+EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "text-embedding-3-small")
 TEMPERATURE = 0.0  # Low temperature for deterministic output
+WHISPER_MODEL_NAME = os.getenv("WHISPER_MODEL_NAME", "base.en")
+WHISPER_CPU_THREADS = int(os.getenv("WHISPER_CPU_THREADS", "4"))
+PRELOAD_WHISPER = os.getenv("PRELOAD_WHISPER", "true").lower() in {"1", "true", "yes"}
 
 # Ensure required directories exist
 KNOWLEDGE_BASE_DIR.mkdir(parents=True, exist_ok=True)
