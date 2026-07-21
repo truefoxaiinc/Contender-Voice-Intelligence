@@ -5,7 +5,7 @@ services:
       - path: .env
         required: false
     environment:
-      CORS_ORIGINS: http://localhost:5173,http://localhost:8080
+      CORS_ORIGINS: http://3.220.230.0:8080
     ports:
       - "8000:8000"
     volumes:
@@ -15,7 +15,7 @@ services:
     build:
       context: frontend
       args:
-        VITE_API_URL: http://localhost:8000
+        VITE_API_URL: http://3.220.230.0:8000
     ports:
       - "8080:80"
     depends_on:
