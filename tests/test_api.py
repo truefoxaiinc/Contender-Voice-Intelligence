@@ -84,3 +84,15 @@ def test_calls_are_private_to_their_owner():
         client.post('/auth/logout')
         register(client, 'other@example.com')
         assert client.get(f"/calls/{call['id']}").status_code == 404
+
+
+def test_specific_call_pdf_export():
+    with TestClient(app) as client:
+        register(client, 'pdf@example.com')
+        call = client.post('/calls/upload', files={'file': ('report.wav', b'RIFFdemo', 'audio/wav')}).json()
+        response = client.get(f"/calls/{call['id']}/export.pdf")
+        assert response.status_code == 200
+        assert response.headers['content-type'] == 'application/pdf'
+        assert response.headers['content-disposition'].endswith('-report.pdf"')
+        assert response.content.startswith(b'%PDF-')
+        assert len(response.content) > 1500

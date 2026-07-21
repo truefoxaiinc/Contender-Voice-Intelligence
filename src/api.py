@@ -13,13 +13,14 @@ from pathlib import Path
 from fastapi import BackgroundTasks, Depends, FastAPI, File, HTTPException, Query, Request, Response, UploadFile
 from fastapi.security import HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, PlainTextResponse, StreamingResponse
+from fastapi.responses import FileResponse, PlainTextResponse, Response as FastAPIResponse, StreamingResponse
 
 from src.config import DATA_DIR, PRELOAD_WHISPER
 from src.auth import bearer, create_session, current_user, delete_session, hash_password, normalize_email, verify_password
 from src.database import add_event, connection, get_call, get_events, init_db, now_iso, row_to_dict
 from src.schemas import AnalyzeCallRequest, AuthResponse, CallAnalysisUpdate, CallEvent, CallRecord, LoginRequest, RegisterRequest, StatusUpdateRequest, UserResponse
 from src.speech import get_speech_provider, normalize_audio
+from src.pdf_report import build_call_pdf
 
 logger = logging.getLogger("contender.api")
 UPLOAD_DIR = Path(DATA_DIR) / "uploads"
@@ -264,5 +265,18 @@ def update_status(call_id: str, payload: StatusUpdateRequest, user: dict = Depen
 @app.get("/calls/{call_id}/export.txt", response_class=PlainTextResponse)
 def export_call(call_id: str, user: dict = Depends(current_user)):
     call = owned_call(call_id, user["id"])
-    important = "\n".join(f"- {item}" for item in call["important_information"])
-    return f"""Contender Voice Call Intelligence\nCall: {call['id']}\nDate: {call['created_at']}\nCaller: {call['caller_name'] or 'Unknown'}\nCompany: {call['company_name'] or 'Unknown'}\nCategory: {call['category']}\nPriority: {call['priority']} - {call['priority_reason']}\nStatus: {call['status']}\n\nSummary\n{call['summary']}\n\nImportant information\n{important or '- None'}\n\nRecommended next action\n{call['recommended_next_action']}\n\nTranscript\n{call['transcript']}\n"""
+    return FastAPIResponse(
+        content=build_call_pdf(call, get_events(call_id)),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{call_id}-report.pdf"'},
+    )
+
+
+@app.get("/calls/{call_id}/export.pdf")
+def export_call_pdf(call_id: str, user: dict = Depends(current_user)):
+    call = owned_call(call_id, user["id"])
+    return FastAPIResponse(
+        content=build_call_pdf(call, get_events(call_id)),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{call_id}-report.pdf"'},
+    )
