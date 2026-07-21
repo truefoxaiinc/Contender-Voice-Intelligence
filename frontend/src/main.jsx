@@ -18,7 +18,7 @@ function App(){
  const [calls,setCalls]=useState([]),[selected,setSelected]=useState(null),[view,setView]=useState('calls');
  const [search,setSearch]=useState(''),[priority,setPriority]=useState(''),[status,setStatus]=useState(''),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const load=()=>user&&request('/calls').then(setCalls).catch(e=>setMessage(e.message));
- useEffect(load,[user?.id]);
+ useEffect(()=>{if(user)load()},[user?.id]);
  useEffect(()=>{if(!selected||!processing.includes(selected.processing_status))return;const timer=setInterval(async()=>{try{const call=await request(`/calls/${selected.id}`);setSelected(call);if(['Complete','Failed'].includes(call.processing_status)){setMessage(call.processing_status==='Complete'?'Analysis complete.':call.processing_error||'Processing failed.');load()}}catch(e){setMessage(e.message)}},500);return()=>clearInterval(timer)},[selected?.id,selected?.processing_status]);
  const shown=useMemo(()=>calls.filter(c=>(!search||`${c.caller_name||''} ${c.company_name||''} ${c.summary} ${c.filename}`.toLowerCase().includes(search.toLowerCase()))&&(!priority||c.priority===priority)&&(!status||c.status===status)),[calls,search,priority,status]);
  async function upload(e){const file=e.target.files[0];if(!file)return;setBusy(true);try{const form=new FormData();form.append('file',file);const call=await request('/calls/upload',{method:'POST',body:form});setSelected(call);setView('detail');setMessage('Upload complete. Start analysis when ready.');load()}catch(err){setMessage(err.message)}finally{setBusy(false);e.target.value=''}}
