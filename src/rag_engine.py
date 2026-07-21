@@ -1,5 +1,4 @@
-import os
-from pathlib import Path
+from functools import lru_cache
 from langchain_community.document_loaders import TextLoader, DirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
@@ -8,6 +7,7 @@ from langchain_community.vectorstores import FAISS
 from src.config import KNOWLEDGE_BASE_DIR, VECTOR_DB_DIR, EMBEDDING_MODEL_NAME
 
 
+@lru_cache(maxsize=1)
 def build_or_load_vector_db():
     """
     Builds the FAISS vector database from data/knowledge_base files if it doesn't exist,
@@ -18,7 +18,7 @@ def build_or_load_vector_db():
 
     # If the vector database already exists, load it from vector_db/
     if faiss_index_path.exists():
-        print("Loading existing vector database from vector_db/...")
+        print("Loading and caching vector database from vector_db/...")
         vector_db = FAISS.load_local(
             folder_path=str(VECTOR_DB_DIR),
             embeddings=embeddings,

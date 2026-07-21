@@ -128,3 +128,69 @@ Contender_Voice_Intelligence/
    git commit -m "docs: add comprehensive README with architecture, benchmark metrics, and project guardrails"
    
    git push -u origin main
+
+## FastAPI + React admin panel
+
+The prototype now includes a FastAPI service and responsive React operations dashboard.
+
+```powershell
+# API (from the repository root)
+pip install -r requirements.txt
+uvicorn src.api:app --reload
+
+# Admin panel (in a second terminal)
+cd frontend
+npm install
+npm run dev
+```
+
+On Windows, the safest backend command is the included script, which always
+uses the project virtual environment instead of a globally installed Uvicorn:
+
+```powershell
+.\run-backend.ps1
+```
+
+Open `http://localhost:5173`. The API documentation is available at
+`http://localhost:8000/docs`.
+
+Register an account on the first screen, then log in to access the dashboard.
+Call uploads, call records, audio playback, exports, status changes, and edits
+are protected and scoped to the logged-in user. Sessions expire after seven
+days and can be invalidated immediately with Log out.
+
+The upload limit is 25 MB and accepted formats are MP3, WAV, and M4A. For a
+lightweight demo, paste a transcript after upload. Audio transcription uses the
+optional `faster-whisper` provider; install it separately when required. AI
+analysis requires `OPENAI_API_KEY` in `.env`.
+
+### Low-latency settings
+
+The backend caches the FAISS index and LLM client and preloads Whisper in a
+background thread. Defaults favor faster CPU processing. They can be adjusted
+in `.env`:
+
+```env
+WHISPER_MODEL_NAME=base.en
+WHISPER_CPU_THREADS=4
+PRELOAD_WHISPER=true
+LLM_MODEL_NAME=gpt-4o-mini
+```
+
+Use `tiny.en` for the fastest English transcription on weaker computers, or
+`small.en` for higher accuracy at the cost of additional processing time. A
+submitted text transcript skips speech-to-text completely and is the fastest
+way to generate a report.
+
+### Docker startup
+
+Create `.env` with `OPENAI_API_KEY`, then run:
+
+```powershell
+docker compose up --build
+```
+
+Open the admin panel at `http://localhost:8080` and API documentation at
+`http://localhost:8000/docs`. FFmpeg and faster-whisper are included in the API
+container. The first automatic transcription downloads the configured Whisper
+model and can therefore take longer than later calls.

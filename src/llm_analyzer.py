@@ -1,9 +1,15 @@
-import json
+from functools import lru_cache
 from langchain_openai import ChatOpenAI
 from src.config import LLM_MODEL_NAME, TEMPERATURE
 from src.schemas import CallAnalysisResponse
 from src.prompts import SYSTEM_PROMPT
 from src.rag_engine import query_knowledge_base
+
+
+@lru_cache(maxsize=1)
+def get_structured_llm():
+    llm = ChatOpenAI(model=LLM_MODEL_NAME, temperature=TEMPERATURE, max_retries=1)
+    return llm.with_structured_output(CallAnalysisResponse)
 
 
 def analyze_transcript(call_id: str, transcript: str) -> dict:
@@ -28,17 +34,7 @@ Call ID: {call_id}
 Transcript: "{transcript}"
 """
 
-    # 3. Initialize LLM with structured output constraint[cite: 1]
-    llm = ChatOpenAI(
-        model=LLM_MODEL_NAME,
-        temperature=TEMPERATURE
-    )
-
-    # Enforce strict Pydantic JSON output schema[cite: 1]
-    structured_llm = llm.with_structured_output(CallAnalysisResponse)
-
-    # 4. Invoke LLM with system prompt and transcript
-    response: CallAnalysisResponse = structured_llm.invoke([
+    response: CallAnalysisResponse = get_structured_llm().invoke([
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": user_message}
     ])
