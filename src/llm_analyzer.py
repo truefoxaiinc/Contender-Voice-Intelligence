@@ -1,6 +1,6 @@
 from functools import lru_cache
 from langchain_openai import ChatOpenAI
-from src.config import LLM_MODEL_NAME, TEMPERATURE
+from src.config import LLM_MODEL_NAME, TEMPERATURE, OPENROUTER_API_KEY, OPENROUTER_BASE_URL
 from src.schemas import CallAnalysisResponse
 from src.prompts import SYSTEM_PROMPT
 from src.rag_engine import query_knowledge_base
@@ -8,7 +8,15 @@ from src.rag_engine import query_knowledge_base
 
 @lru_cache(maxsize=1)
 def get_structured_llm():
-    llm = ChatOpenAI(model=LLM_MODEL_NAME, temperature=TEMPERATURE, max_retries=1)
+    if not OPENROUTER_API_KEY:
+        raise RuntimeError("OPENROUTER_API_KEY is required for call analysis")
+    llm = ChatOpenAI(
+        model=LLM_MODEL_NAME,
+        api_key=OPENROUTER_API_KEY,
+        base_url=OPENROUTER_BASE_URL,
+        temperature=TEMPERATURE,
+        max_retries=1,
+    )
     return llm.with_structured_output(CallAnalysisResponse)
 
 
