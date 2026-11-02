@@ -4,7 +4,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
-from src.config import KNOWLEDGE_BASE_DIR, VECTOR_DB_DIR, EMBEDDING_MODEL_NAME
+from src.config import KNOWLEDGE_BASE_DIR, VECTOR_DB_DIR, EMBEDDING_MODEL_NAME, OPENROUTER_API_KEY, OPENROUTER_BASE_URL
 
 
 @lru_cache(maxsize=1)
@@ -13,7 +13,14 @@ def build_or_load_vector_db():
     Builds the FAISS vector database from data/knowledge_base files if it doesn't exist,
     otherwise loads the existing database from vector_db/.
     """
-    embeddings = OpenAIEmbeddings(model=EMBEDDING_MODEL_NAME)
+    if not OPENROUTER_API_KEY:
+        raise RuntimeError("OPENROUTER_API_KEY is required for SOP retrieval")
+    embeddings = OpenAIEmbeddings(
+        model=EMBEDDING_MODEL_NAME,
+        api_key=OPENROUTER_API_KEY,
+        base_url=OPENROUTER_BASE_URL,
+        check_embedding_ctx_length=False,
+    )
     faiss_index_path = VECTOR_DB_DIR / "index.faiss"
 
     # If the vector database already exists, load it from vector_db/
